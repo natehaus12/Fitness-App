@@ -55,7 +55,7 @@ ROOT_URLCONF = 'fitnessApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['tempates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
