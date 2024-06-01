@@ -1,0 +1,7 @@
+<form method=POST action="{% url 'food_search_results' %}">
+
+   {% csrf_token %}
+
+    <input type="search" placeholder="Search for Foods">
+    <button type="submit">Search</button>
+</form>

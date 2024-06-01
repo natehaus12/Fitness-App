@@ -1,9 +1,12 @@
 {% if request.user.is_authenticated %}
-  <p>{{ request.user.username }}</p>
+  <p>Weclome {{ request.user.username }}</p>
+ 
+  <p> What would you like to accomplish today? </p>
+  <p> <a href="{% url 'food_search' %}">Click Here </a> to search for foods and their calories and maconutrient info </p>
+  <p> Click here to search for workouts </p>
+  <p> Click here to ask questions to the fitness community </p>
   <a href="{% url 'logout' %}">Logout</a>
 {% else %}
   <a href="{% url 'login' %}">Login</a>
   <a href="{% url 'signup' %}">Signup</a>
 {% endif %}
-
-<h1>Welcome!</h1>

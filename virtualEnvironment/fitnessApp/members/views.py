@@ -45,3 +45,10 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+def food_search (request):
+    return render(request, 'food_search.html')
+
+def food_search_results (request):
+     return render(request, 'food_search_results.html')
+
