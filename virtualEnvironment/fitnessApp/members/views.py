@@ -2,7 +2,10 @@ from django.http import HttpResponse
 from django.template import loader
 import requests
 from django.http import JsonResponse
+from . import forms
 from fatsecret import Fatsecret
+from . import models
+from django.shortcuts import render, get_object_or_404
 
     
 def members(request):
@@ -11,7 +14,7 @@ def members(request):
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout 
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm, SearchForm
 
 
 # Create your views here.
@@ -38,8 +41,7 @@ def user_login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
-            if user:
-                login(request, user)    
+            if user:  
                 return redirect('home')
     else:
         form = LoginForm()
@@ -51,47 +53,53 @@ def user_logout(request):
     return redirect('login')
 
 def food_search (request):
+
     consumer_key = '434d43581c294b6587358f705f6247db'
     consumer_secret = '2df0aec6cece4d81b8ba010f1c349320'
 
     fs = Fatsecret(consumer_key, consumer_secret)
 
-    # Test Calls w/o authentication
 
-    print("\n\n ---- No Authentication Required ---- \n\n")
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            food_name = form.cleaned_data['food_name']
+            foods = fs.foods_search(str(food_name))
+            food_description = format(len(foods))
+            food_description2 = format(foods)
+         
+            
+            return render(request, 'food_search_results.html', {
+                    'food_name': str(food_name),
+                    'description': str(food_description),
+                    'description2': str(food_description2)
+                })
 
-    foods = fs.foods_search("Tacos")
-    print("Food Search Results: {}".format(len(foods)))
-    print("{}\n".format(foods))
 
-    food = fs.food_get("1345")
-    print("Food Item 1345")
-    print("{}\n".format(food))
+        
+    else:
+        form = SearchForm()
 
-    recipes = fs.recipes_search("Tomato Soup")
-    print("Recipe Search Results:")
-    print("{}\n".format(recipes))
+       
+    return render(request, 'food_search.html', { 'form': form} )
 
-    recipe = fs.recipe_get("88339")
-    print("Recipe 88339")
-    print("{}\n".format(recipe))
 
-    # Test Calls with 3 Legged Oauth
+# def food_search_results (food_name):
 
-    print("\n\n ------ OAuth Example ------ \n\n")
+     
+#     consumer_key = '434d43581c294b6587358f705f6247db'
+#     consumer_secret = '2df0aec6cece4d81b8ba010f1c349320'
 
-    print(fs.get_authorize_url())
-    session_token = fs.authenticate(input("\nPIN: "))
+#     fs = Fatsecret(consumer_key, consumer_secret)
 
-    foods = fs.foods_get_most_eaten()
-    print("Most Eaten Food Results: {}".format(len(foods)))
+#     # Test Calls w/o authentication
 
-    recipes = fs.recipes_search("Enchiladas")
-    print("Recipe Search Results: {}".format(len(recipes)))
+#     print("\n\n ---- No Authentication Required ---- \n\n")
 
-    profile = fs.profile_get()
-    print("Profile: {}".format(profile))
+#     foods = fs.foods_search("Tacos")
+#     print("Food Search Results: {}".format(len(foods)))
+#     print("{}\n".format(foods))
+#     return render(food_name, 'food_search_results.html')
 
-def food_search_results (request):
-     return render(request, 'food_search_results.html')
+
 
