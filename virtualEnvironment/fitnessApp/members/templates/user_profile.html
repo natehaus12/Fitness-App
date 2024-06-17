@@ -1,5 +1,3 @@
-{% if request.user.is_authenticated %}
-
 <style>
 
   ul {
@@ -34,11 +32,10 @@
   <li><a href="{% url 'food_search' %}"> Search for Foods </li>
   <li><a href="{% url 'logout' %}">Logout</li>
 </ul>
+
+
+<p> Username: {{request.user.username }} </p>
+<p> First Name: </p>
+<p> Last Name: </p>
+
  
-
-{% else %}
-  <p> user is not authenticated</p>
-
-  <a href="{% url 'login' %}">Login</a>
-  <a href="{% url 'signup' %}">Signup</a>
-{% endif %}

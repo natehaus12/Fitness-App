@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 class Member(models.Model):
   firstname = models.CharField(max_length=255)
   lastname = models.CharField(max_length=255)
+  height = models.CharField(max_length=255)
+  weight = models.CharField(max_length=255)
+  goal = models.CharField(max_length=255)
+
 
 class Food(models.Model):
   food_name = models.CharField(max_length=255)

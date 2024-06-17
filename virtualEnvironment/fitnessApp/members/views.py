@@ -68,15 +68,21 @@ def food_search (request):
         form = SearchForm(request.POST)
         if form.is_valid():
             food_name = form.cleaned_data['food_name']
-            foods = fs.foods_search(str(food_name))
-            food_description = format(len(foods))
-            food_description2 = format(foods)
+
+            foods = fs.foods_search(food_name)
+            y=0
+
+            for x in foods:
+
+                food_label = foods[y].get("food_name")
+                food_description = foods[y].get("food_description")
+                y+=1
          
             
-            return render(request, 'food_search_results.html', {
-                    'food_name': str(food_name),
-                    'description': str(food_description),
-                    'description2': str(food_description2)
+                return render(request, 'food_search_results.html', {
+                        'food_name': str(food_name),
+                        'food_label': str(food_label),
+                        'description': str(food_description),
                 })
 
 
@@ -88,22 +94,7 @@ def food_search (request):
     return render(request, 'food_search.html', { 'form': form} )
 
 
-# def food_search_results (food_name):
-
-     
-#     consumer_key = '434d43581c294b6587358f705f6247db'
-#     consumer_secret = '2df0aec6cece4d81b8ba010f1c349320'
-
-#     fs = Fatsecret(consumer_key, consumer_secret)
-
-#     # Test Calls w/o authentication
-
-#     print("\n\n ---- No Authentication Required ---- \n\n")
-
-#     foods = fs.foods_search("Tacos")
-#     print("Food Search Results: {}".format(len(foods)))
-#     print("{}\n".format(foods))
-#     return render(food_name, 'food_search_results.html')
-
+def user_profile(request):
+    return render(request, 'user_profile.html')
 
 
