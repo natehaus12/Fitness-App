@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignupForm, LoginForm
@@ -9,6 +10,9 @@ from . import forms
 from fatsecret import Fatsecret
 from . import models
 from django.shortcuts import render, redirect
+from .forms import UpdateUserForm, UpdateProfileForm
+from .models import Profile
+from django.views import View
 
     
 def members(request):
@@ -95,6 +99,18 @@ def food_search (request):
 
 
 def user_profile(request):
-    return render(request, 'user_profile.html')
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='user_profile')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
+    return render(request, 'user_profile.html', {'user_form': user_form, 'profile_form': profile_form})
 

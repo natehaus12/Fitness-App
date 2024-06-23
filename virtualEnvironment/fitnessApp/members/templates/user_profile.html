@@ -34,8 +34,32 @@
 </ul>
 
 
-<p> Username: {{request.user.username }} </p>
-<p> First Name: </p>
-<p> Last Name: </p>
+    <div class="form-content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="small mb-1">Username:</label>
+                            {{ user_form.username }}<br>
+                        <label class="small mb-1">First name:</label>
+                            {{ user_form.first_name }}<br>
+                        <label class="small mb-1">Last Name:</label>
+                            {{ user_form.last_name }}<br> 
+                        <label class="small mb-1">Height:</label>
+                            {{ profile_form.height }}<br>
+                        <label class="small mb-1">Weight:</label>
+                            {{ profile_form.weight }}<br>
+                        <label class="small mb-1">Goal:</label>
+                            {{ profile_form.goal }}<br>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+            <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+        </form>
+    </div>
+
 
  
