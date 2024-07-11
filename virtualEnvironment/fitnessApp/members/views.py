@@ -72,22 +72,145 @@ def food_search (request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
+
             food_name = form.cleaned_data['food_name']
-
             foods = fs.foods_search(food_name)
-            y=0
 
-            for x in foods:
+            food_label = foods[0].get("food_name")
+            food_description = foods[0].get("food_description")
+            food_id = foods[0].get("food_id")
+            calories = fs.food_get(food_id)
 
-                food_label = foods[y].get("food_name")
-                food_description = foods[y].get("food_description")
-                y+=1
+            if type(calories.get("servings").get("serving")) is dict:
+
+                food_calories = calories.get("servings").get("serving").get("calories")
+                food_protein = calories.get("servings").get("serving").get("protein")
+                food_carbs = calories.get("servings").get("serving").get("carbohydrate")
+                food_fat = calories.get("servings").get("serving").get("fat")
+            else:
+                food_calories = calories.get("servings").get("serving")[1].get("calories")
+                food_protein = calories.get("servings").get("serving")[1].get("protein")
+                food_carbs = calories.get("servings").get("serving")[1].get("carbohydrate")
+                food_fat = calories.get("servings").get("serving")[1].get("fat")
+
+
          
+
+
+            food_label2 = foods[1].get("food_name")
+            food_description2 = foods[1].get("food_description")
+            food_id2 = foods[1].get("food_id")
+            calories2 = fs.food_get(food_id2)
+
+            if type(calories2.get("servings").get("serving")) is dict:
+
+                food_calories2 = calories2.get("servings").get("serving").get("calories")
+                food_protein2 = calories2.get("servings").get("serving").get("protein")
+                food_carbs2 = calories2.get("servings").get("serving").get("carbohydrate")
+                food_fat2 = calories2.get("servings").get("serving").get("fat")
+            else:
+                food_calories2 = calories2.get("servings").get("serving")[1].get("calories")
+                food_protein2 = calories2.get("servings").get("serving")[1].get("protein")
+                food_carbs2 = calories2.get("servings").get("serving")[1].get("carbohydrate")
+                food_fat2 = calories2.get("servings").get("serving")[1].get("fat")
+
+
+
+            food_label3 = foods[2].get("food_name")
+            food_description3 = foods[2].get("food_description")
+            food_id3 = foods[2].get("food_id")
+            calories3 = fs.food_get(food_id3)
+
+            if type(calories3.get("servings").get("serving")) is dict:
+
+                food_calories3 = calories3.get("servings").get("serving").get("calories")
+                food_protein3 = calories3.get("servings").get("serving").get("protein")
+                food_carbs3 = calories3.get("servings").get("serving").get("carbohydrate")
+                food_fat3 = calories3.get("servings").get("serving").get("fat")
+            else:
+                food_calories3 = calories3.get("servings").get("serving")[1].get("calories")
+                food_protein3 = calories3.get("servings").get("serving")[1].get("protein")
+                food_carbs3 = calories3.get("servings").get("serving")[1].get("carbohydrate")
+                food_fat3 = calories3.get("servings").get("serving")[1].get("fat")
+
+            food_label4 = foods[3].get("food_name")
+            food_description4 = foods[3].get("food_description")
+            food_id4 = foods[3].get("food_id")
+            calories4 = fs.food_get(food_id4)
+
+            if type(calories4.get("servings").get("serving")) is dict:
+
+                food_calories4 = calories4.get("servings").get("serving").get("calories")
+                food_protein4 = calories4.get("servings").get("serving").get("protein")
+                food_carbs4 = calories4.get("servings").get("serving").get("carbohydrate")
+                food_fat4 = calories4.get("servings").get("serving").get("fat")
+            else:
+                food_calories4 = calories4.get("servings").get("serving")[1].get("calories")
+                food_protein4 = calories4.get("servings").get("serving")[1].get("protein")
+                food_carbs4 = calories4.get("servings").get("serving")[1].get("carbohydrate")
+                food_fat4 = calories4.get("servings").get("serving")[1].get("fat")
+
+
+            food_label5 = foods[4].get("food_name")
+            food_description5 = foods[4].get("food_description")
+            food_id5 = foods[4].get("food_id")
+            calories5 = fs.food_get(food_id5)
+
+            if type(calories5.get("servings").get("serving")) is dict:
+
+                food_calories5 = calories5.get("servings").get("serving").get("calories")
+                food_protein5 = calories5.get("servings").get("serving").get("protein")
+                food_carbs5 = calories5.get("servings").get("serving").get("carbohydrate")
+                food_fat5 = calories5.get("servings").get("serving").get("fat")
+            else:
+                food_calories5 = calories5.get("servings").get("serving")[1].get("calories")
+                food_protein5 = calories5.get("servings").get("serving")[1].get("protein")
+                food_carbs5 = calories5.get("servings").get("serving")[1].get("carbohydrate")
+                food_fat5 = calories5.get("servings").get("serving")[1].get("fat")
             
-                return render(request, 'food_search_results.html', {
-                        'food_name': str(food_name),
-                        'food_label': str(food_label),
-                        'description': str(food_description),
+            return render(request, 'food_search_results.html', {
+                    'food_name': str(food_name),
+
+                    'food_label': str(food_label),
+                    'description': str(food_description),
+                    "food_calories" : str(food_calories),
+                    "food_protein" : str(food_protein),
+                    "food_carbs" : str(food_carbs),
+                    "food_fat" : str(food_fat),
+
+
+
+                    'food_label2': str(food_label2),
+                    'description2': str(food_description2),
+                    "food_calories2" : str(food_calories2),
+                    "food_protein2" : str(food_protein2),
+                    "food_carbs2" : str(food_carbs2),
+                    "food_fat2" : str(food_fat2),
+
+                    
+                    'food_label3': str(food_label3),
+                    'description3': str(food_description3),
+                    "food_calories3" : str(food_calories3),
+                     "food_protein3" : str(food_protein3),
+                    "food_carbs3" : str(food_carbs3),
+                    "food_fat3" : str(food_fat3),
+
+                    
+                    'food_label4': str(food_label4),
+                    'description4': str(food_description4),
+                    "food_calories4" : str(food_calories4),
+                    "food_protein4" : str(food_protein4),
+                    "food_carbs4" : str(food_carbs4),
+                    "food_fat4" : str(food_fat4),
+
+
+                    
+                    'food_label5': str(food_label5),
+                    'description5': str(food_description5),
+                    "food_calories5" : str(food_calories5),
+                    "food_protein5" : str(food_protein5),
+                    "food_carbs5" : str(food_carbs5),
+                    "food_fat5" : str(food_fat5),
                 })
 
 

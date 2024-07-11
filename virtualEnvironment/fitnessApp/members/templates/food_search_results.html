@@ -1,3 +1,5 @@
+
+
 <style>
 
     ul {
@@ -12,7 +14,7 @@
       float: left;
     }
     
-    li a {
+    li a{
       display: block;
       color: white;
       text-align: center;
@@ -33,8 +35,37 @@
     <li><a href="{% url 'logout' %}"> Logout </a></li>
   </ul> <br>
 
-<h1> You searched for ... </h1>
+<h1> You searched for "{{ food_name }}" </h1>
 
-<p>{{ food_name }}</p>
-<p> {{food_label}}: {{description}} </p>
-<p> {{description2}} </p>
+<h2> Results: </h2>
+
+<p> <b>1. {{food_label}} </b></p>
+  <p>   Calories: {{food_calories}} </p>
+  <p>   Protein: {{food_protein}}g </p>
+  <p>   Carbohydrates: {{food_carbs}}g </p>
+  <p>   Fat: {{food_fat}} g</p>
+
+  <p> <b>2. {{food_label2}} </b></p>
+  <p>   Calories: {{food_calories2}} </p>
+  <p>   Protein: {{food_protein2}}g </p>
+  <p>   Carbohydrates: {{food_carbs2}}g </p>
+  <p>   Fat: {{food_fat2}} g</p>
+
+
+  <p> <b>3. {{food_label3}} </b></p>
+  <p>   Calories: {{food_calories3}} </p>
+  <p>   Protein: {{food_protein3}}g </p>
+  <p>   Carbohydrates: {{food_carbs3}}g </p>
+  <p>   Fat: {{food_fat3}} g</p>
+
+  <p> <b>4. {{food_label4}} </b></p>
+  <p>   Calories: {{food_calories4}} </p>
+  <p>   Protein: {{food_protein4}}g </p>
+  <p>   Carbohydrates: {{food_carbs4}}g </p>
+  <p>   Fat: {{food_fat4}} g</p>
+
+  <p> <b>5. {{food_label5}} </b></p>
+  <p>   Calories: {{food_calories5}} </p>
+  <p>   Protein: {{food_protein5}}g </p>
+  <p>   Carbohydrates: {{food_carbs5}}g </p>
+  <p>   Fat: {{food_fat5}} g</p>
