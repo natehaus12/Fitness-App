@@ -13,6 +13,7 @@ from django.shortcuts import render, redirect
 from .forms import UpdateUserForm, UpdateProfileForm
 from .models import Profile
 from django.views import View
+from django.contrib.auth.decorators import login_required
 
     
 def members(request):
@@ -97,7 +98,7 @@ def food_search (request):
        
     return render(request, 'food_search.html', { 'form': form} )
 
-
+@login_required
 def user_profile(request):
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)

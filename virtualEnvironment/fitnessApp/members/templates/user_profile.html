@@ -1,65 +1,58 @@
 <style>
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      margin: auto
+    }
+    
+    li a:hover {
+      background-color: #111;
+    }
   
-  li {
-    float: left;
-  }
+  </style>
   
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    margin: auto
-  }
-  
-  li a:hover {
-    background-color: #111;
-  }
-
-</style>
-
- <ul>
-  <li><a href="{% url 'user_profile' %}"> User Home </li>
-  <li><a href="{% url 'food_search' %}"> Search for Foods </li>
-  <li><a href="{% url 'logout' %}">Logout</li>
-</ul>
+   <ul>
+    <li><a href="{% url 'user_profile' %}"> User Home</a> </li>
+    <li><a href="{% url 'food_search' %}"> Search for Foods </a></li>
+    <li><a href="{% url 'logout' %}"> Logout </a></li>
+  </ul> <br>
 
 
-    <div class="form-content">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label class="small mb-1">Username:</label>
-                            {{ user_form.username }}<br>
-                        <label class="small mb-1">First name:</label>
-                            {{ user_form.first_name }}<br>
-                        <label class="small mb-1">Last Name:</label>
-                            {{ user_form.last_name }}<br> 
-                        <label class="small mb-1">Height:</label>
-                            {{ profile_form.height }}<br>
-                        <label class="small mb-1">Weight:</label>
-                            {{ profile_form.weight }}<br>
-                        <label class="small mb-1">Goal:</label>
-                            {{ profile_form.goal }}<br>
-                    </div>
-                </div>
-            </div>
-            <br><br>
-            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
-            <button type="reset" class="btn btn-dark btn-lg">Reset</button>
-        </form>
-    </div>
+<form method="POST">
+    {% csrf_token %}
+                <label>Username:</label>
+                    {{ user_form.username }} <br>
+                <label>First name:</label>
+                    {{ user_form.first_name }}<br>
+                <label>Last Name:</label>
+                    {{ user_form.last_name }}<br> 
+                <label>Height:</label>
+                    {{ profile_form.height }}<br>
+                <label>Weight:</label>
+                    {{ profile_form.weight }}<br>
+                <label>Goal:</label>
+                    {{ profile_form.goal }}<br>
+    <br><br>
+    <button type="submit">Save Changes</button>
+    <button type="reset">Reset</button>
+</form>
+
 
 
  

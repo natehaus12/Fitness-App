@@ -38,9 +38,15 @@ class UpdateUserForm(forms.ModelForm):
 
 class UpdateProfileForm(forms.ModelForm):
 
-    height = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 1}))   
-    weight = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 1}))                                               
-    goal = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    height = forms.CharField(max_length=100,
+                               required=False,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+    weight = forms.CharField(max_length=100,
+                               required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))                                             
+    goal = forms.CharField(max_length=100,
+                               required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Profile
